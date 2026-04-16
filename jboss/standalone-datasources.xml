@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources xmlns="http://www.jboss.org/ironjacamar/schema">
+
+    <xa-datasource jndi-name="java:/jdbc/infraXADS" pool-name="infraXADS" enabled="true" use-java-context="true" statistics-enabled="true">
+        <xa-datasource-property name="URL">jdbc:oracle:thin:@//infra-db:1521/INFRAPRD</xa-datasource-property>
+        <driver>oracle</driver>
+        <security>
+            <user-name>${conjur:infra/db-user}</user-name>
+            <password>${conjur:infra/db-password}</password>
+        </security>
+        <xa-pool>
+            <min-pool-size>5</min-pool-size>
+            <max-pool-size>30</max-pool-size>
+            <prefill>true</prefill>
+            <is-same-rm-override>false</is-same-rm-override>
+        </xa-pool>
+        <timeout>
+            <blocking-timeout-millis>5000</blocking-timeout-millis>
+            <idle-timeout-minutes>5</idle-timeout-minutes>
+        </timeout>
+        <validation>
+            <check-valid-connection-sql>select 1 from dual</check-valid-connection-sql>
+            <background-validation>true</background-validation>
+            <background-validation-millis>30000</background-validation-millis>
+        </validation>
+    </xa-datasource>
+
+    <xa-datasource jndi-name="java:/jdbc/billingXADS" pool-name="billingXADS" enabled="true" use-java-context="true" statistics-enabled="true">
+        <xa-datasource-property name="URL">jdbc:oracle:thin:@//billing-db:1521/BILLPRD</xa-datasource-property>
+        <driver>oracle</driver>
+        <security>
+            <user-name>${conjur:billing/db-user}</user-name>
+            <password>${conjur:billing/db-password}</password>
+        </security>
+        <xa-pool>
+            <min-pool-size>10</min-pool-size>
+            <max-pool-size>80</max-pool-size>
+            <prefill>true</prefill>
+        </xa-pool>
+        <timeout>
+            <blocking-timeout-millis>4000</blocking-timeout-millis>
+            <idle-timeout-minutes>3</idle-timeout-minutes>
+        </timeout>
+    </xa-datasource>
+
+    <xa-datasource jndi-name="java:/jdbc/acctXADS" pool-name="acctXADS" enabled="true" use-java-context="true" statistics-enabled="true">
+        <xa-datasource-property name="URL">jdbc:oracle:thin:@//acct-db:1521/ACCTPRD</xa-datasource-property>
+        <driver>oracle</driver>
+        <security>
+            <user-name>${conjur:acct/db-user}</user-name>
+            <password>${conjur:acct/db-password}</password>
+        </security>
+        <xa-pool>
+            <min-pool-size>5</min-pool-size>
+            <max-pool-size>50</max-pool-size>
+            <prefill>false</prefill>
+        </xa-pool>
+        <timeout>
+            <blocking-timeout-millis>6000</blocking-timeout-millis>
+            <idle-timeout-minutes>5</idle-timeout-minutes>
+        </timeout>
+    </xa-datasource>
+
+</datasources>
