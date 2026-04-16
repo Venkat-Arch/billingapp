@@ -1,0 +1,17 @@
+### getplan
+GET http://localhost:8080/billingapp/api/plans
+Accept: application/json
+
+### getplanId
+GET http://localhost:8080/billingapp/api/plans/PLAN-1001
+Accept: application/json
+
+### postpayment
+POST http://localhost:8080/billingapp/api/plans/payments
+Content-Type: application/json
+
+{
+  "planId": "PLAN-1001",
+  "amount": 129.99,
+  "currency": "USD"
+}
